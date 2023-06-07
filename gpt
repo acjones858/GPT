@@ -1,0 +1,23 @@
+import openai
+import readline
+
+openai.api_key = 'YOUR_API_KEY'
+
+def send_message(message):
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=message,
+        max_tokens=100,
+        temperature=0.7,
+        n=1,
+        stop=None,
+        timeout=10
+    )
+    return response.choices[0].text.strip()
+
+while True:
+    user_input = input('> ')
+    if user_input.lower() == 'exit':
+        break
+    response = send_message(user_input)
+    print(response)
